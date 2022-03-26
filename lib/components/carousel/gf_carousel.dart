@@ -200,7 +200,7 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
+  Widget build(BuildContext context) => Column(
         children: <Widget>[
           getPageWrapper(PageView.builder(
             physics: widget.scrollPhysics,
@@ -288,24 +288,25 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
                   right: 0,
                   bottom: 0,
                   child: Container(
+                    padding: EdgeInsets.only(top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: widget.map<Widget>(
                           widget.items,
                           (pagerIndex, url) => Container(
                                 width: widget.pagerSize == null
-                                    ? 8.0
+                                    ? 24.0
                                     : widget.pagerSize,
                                 height: widget.pagerSize == null
                                     ? 8.0
                                     : widget.pagerSize,
                                 margin: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 2),
+                                    vertical: 10, horizontal: 3),
                                 decoration: BoxDecoration(
                                   border: currentSlide == pagerIndex
                                       ? widget.activeDotBorder
                                       : widget.passiveDotBorder,
-                                  shape: BoxShape.circle,
+                          
                                   color: currentSlide == pagerIndex
                                       ? widget.activeIndicator == null
                                           ? const Color.fromRGBO(0, 0, 0, 0.9)

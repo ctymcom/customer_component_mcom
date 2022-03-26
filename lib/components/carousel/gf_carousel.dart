@@ -290,10 +290,9 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: widget.map<Widget>(
                       widget.items,
-                      (pagerIndex, url) => Container(
-                            width: widget.pagerSize == null
-                                ? 20.0
-                                : widget.pagerSize,
+                      (pagerIndex, url) => AnimatedContainer(
+                            duration: Duration(milliseconds: 350),
+                            width: currentSlide == pagerIndex ? 20.0 : 8.0,
                             height: widget.pagerSize == null
                                 ? 8.0
                                 : widget.pagerSize,

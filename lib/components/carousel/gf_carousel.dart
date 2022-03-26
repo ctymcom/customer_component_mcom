@@ -173,7 +173,7 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
 
   Widget getPageWrapper(Widget child) {
     if (widget.height != null) {
-      final Widget wrapper = Container(height: widget.height, child: child);
+      final Widget wrapper = Container(height: widget.height, child: child,  );
       return widget.autoPlay && widget.pauseAutoPlayOnTouch != null
           ? addGestureDetection(wrapper)
           : wrapper;
@@ -201,6 +201,7 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           getPageWrapper(PageView.builder(
             physics: widget.scrollPhysics,
@@ -283,44 +284,37 @@ class _GFCarouselState extends State<GFCarousel> with TickerProviderStateMixin {
             },
           )),
           widget.hasPagination == true
-              ? Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: widget.map<Widget>(
-                          widget.items,
-                          (pagerIndex, url) => Container(
-                                width: widget.pagerSize == null
-                                    ? 24.0
-                                    : widget.pagerSize,
-                                height: widget.pagerSize == null
-                                    ? 8.0
-                                    : widget.pagerSize,
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 3),
-                                decoration: BoxDecoration(
-                                  border: currentSlide == pagerIndex
-                                      ? widget.activeDotBorder
-                                      : widget.passiveDotBorder,
-                          
-                                  color: currentSlide == pagerIndex
-                                      ? widget.activeIndicator == null
-                                          ? const Color.fromRGBO(0, 0, 0, 0.9)
-                                          : widget.activeIndicator!
-                                      : widget.passiveIndicator == null
-                                          ? const Color.fromRGBO(0, 0, 0, 0.4)
-                                          : widget.passiveIndicator!,
-                                ),
-                              )
-                          // ignore: avoid_as
-                          ),
-                    ),
-                  ),
-                )
+              ? Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widget.map<Widget>(
+                      widget.items,
+                      (pagerIndex, url) => Container(
+                            width: widget.pagerSize == null
+                                ? 20.0
+                                : widget.pagerSize,
+                            height: widget.pagerSize == null
+                                ? 8.0
+                                : widget.pagerSize,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 3),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                      
+                              color: currentSlide == pagerIndex
+                                  ? widget.activeIndicator == null
+                                      ? const Color.fromRGBO(0, 0, 0, 0.9)
+                                      : widget.activeIndicator!
+                                  : widget.passiveIndicator == null
+                                      ? const Color.fromRGBO(0, 0, 0, 0.4)
+                                      : widget.passiveIndicator!,
+                            ),
+                          )
+                      // ignore: avoid_as
+                      ),
+                ),
+              )
               : Container(),
         ],
       );
